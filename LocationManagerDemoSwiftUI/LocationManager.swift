@@ -1,6 +1,8 @@
 import SwiftUI
 
-@Observable final class LocationManager : NSObject, CLLocationManagerDelegate {
+@Observable
+@MainActor
+final class LocationManager : NSObject, CLLocationManagerDelegate {
     
     private let manager = CLLocationManager()
     private(set) var location: CLLocation?
@@ -11,9 +13,6 @@ import SwiftUI
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-        
-        manager.startUpdatingHeading()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

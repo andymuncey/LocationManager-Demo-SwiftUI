@@ -3,7 +3,11 @@ import SwiftUI
 @Observable class LocationViewModel {
     
     private let manager = LocationManager()
+    //private let manager = LocationUpdateManager() //alternate approach (no headings)
+    
     private let reverseGeocoder = ReverseGeocoder()
+    
+    
     
     private(set) var address: String? = nil
     
@@ -33,6 +37,7 @@ import SwiftUI
     }
     
     var heading: String {
+        //"N/A when using CLLocationUpdate" //uncomment if using LocationUpdateManager
         format(manager.heading?.trueHeading, places: 0, unit: "°")
     }
     

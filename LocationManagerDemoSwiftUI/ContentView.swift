@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     
     let model = LocationViewModel()
-    @State var updatingLocation = true
+    @State var updatingLocation = false
     
     var body: some View {
         VStack {
