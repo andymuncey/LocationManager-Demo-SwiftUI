@@ -1,21 +1,18 @@
-
-import CoreLocation
 import MapKit
 
 class ReverseGeocoder {
-    
-    var address: String? = nil
-    
+
     /**
-     Historically we would use CLGeocoider, but now we use MapKit
+     Historically we would use CLGeocoder, but as of iOS 26 we use MapKit
      */
-    func reverseGeocode(location: CLLocation) async {
+    static func reverseGeocode(location: CLLocation) async -> String {
         if let request = MKReverseGeocodingRequest(location: location) {
             let mapitems = try? await request.mapItems
             if let mapitem = mapitems?.first {
-                address = mapitem.address?.fullAddress
+                return mapitem.address?.fullAddress ?? "Place has no address"
             }
         }
+        return "Place is not named"
     }
 }
 
